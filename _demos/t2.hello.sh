@@ -1,19 +1,20 @@
-TARGET="hello-world/hello-world.c"
-# TARGET="hello-world/printf.c"
+# TARGET="hello-world/hello-world.c"
+TARGET="hello-world/printf.c"
 
 OUTDIR="_demos/outdir"
 SPECS="build-meson/picolibc.specs"
 LDSCRIPT="hello-world/riscv.ld"
 
 args=(
-  # -march=rv64imac -mabi=lp64
-  -march=rv64im -mabi=lp64
+  # -march=rv64im -mabi=lp64
+  -march=rv64imd -mabi=lp64d
   -specs=$SPECS
   -mcmodel=medany
   # -g
   -O0
   # -v
   --oslib=semihost
+  # --oslib=dummyhost
   -T$LDSCRIPT
   $TARGET
 )
