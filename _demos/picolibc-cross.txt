@@ -11,6 +11,6 @@ cpu = 'riscv64'
 endian = 'little'
 
 [properties]
-c_args = [  '-march=rv64gc', '-mabi=lp64d', '-mcmodel=medany', '-nostdlib', '-fno-common', '-ftls-model=local-exec' ]
+c_args = [  '-march=rv64im_zicsr', '-mabi=lp64', '-mcmodel=medany', '-nostdlib', '-fno-common', '-ftls-model=local-exec' ]
 needs_exe_wrapper = true
 skip_sanity_check = true

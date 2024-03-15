@@ -6,8 +6,8 @@ SPECS="build-meson/picolibc.specs"
 LDSCRIPT="hello-world/riscv.ld"
 
 args=(
-  # -march=rv64im -mabi=lp64
-  -march=rv64imd -mabi=lp64d
+  -march=rv64im -mabi=lp64
+  # -march=rv64imd -mabi=lp64d
   -specs=$SPECS
   -mcmodel=medany
   # -g

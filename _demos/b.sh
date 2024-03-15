@@ -1,5 +1,5 @@
 # toolchain is built with
-# `./configure --prefix=$RISCV --with-arch=rv64gc --with-abi=lp64d --with-sim=spike --enable-llvm`
+# `./configure --prefix=$RISCV --with-arch=rv64im --with-abi=lp64 --with-sim=spike --enable-llvm`
 
 # TODO: `picolibc-cross.txt` come from project `crosstool-ng`, needs update
 
