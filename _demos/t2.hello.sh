@@ -1,9 +1,9 @@
-# TARGET="hello-world/hello-world.c"
-TARGET="hello-world/printf.c"
+TARGET="hello-world/hello-world.c"
+# TARGET="hello-world/printf.c"
 
 OUTDIR="_demos/outdir"
 SPECS="build-meson/picolibc.specs"
-LDSCRIPT="hello-world/riscv.ld"
+LDSCRIPT="_demos/riscv.ld"
 
 args=(
   -march=rv64im -mabi=lp64
@@ -28,6 +28,7 @@ riscv64-unknown-elf-objdump -d -g $OUTDIR/a.out >$OUTDIR/a.out.g.dasm
 
 # =============================================================================
 
+# semihost
 args=(
   -machine virt
   -cpu rv64
@@ -39,3 +40,14 @@ args=(
   -kernel $OUTDIR/a.out
 )
 qemu-system-riscv64 "${args[@]}"
+
+# =============================================================================
+
+# debug
+args=(
+  --pc=0x80000000
+  -l
+  _demos/outdir/a.out
+)
+spike -d "${args[@]}"
+# spike "${args[@]}"
