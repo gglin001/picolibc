@@ -49,7 +49,7 @@ args=(
   -l
   _demos/outdir/a.out
 )
-spike -l --log log.log "${args[@]}"
-# spike -l "${args[@]}" 2>log.log
+spike -l --log _demo/log.log "${args[@]}"
+# spike -l "${args[@]}" 2>_demo/log.log
 # spike -d "${args[@]}"
 # spike "${args[@]}"
