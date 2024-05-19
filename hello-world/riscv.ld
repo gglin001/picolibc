@@ -1,7 +1,7 @@
 __flash = 0x80000000;
-__flash_size = 16M;
-__ram = 0x81000000;
-__ram_size = 32M;
-__stack_size = 8M;
+__flash_size = 0x00080000;
+__ram = 0x80080000;
+__ram_size = 0x40000;
+__stack_size = 1k;
 
 INCLUDE picolibc.ld
