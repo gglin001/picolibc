@@ -26,7 +26,7 @@ riscv64-unknown-elf-gcc -o $OUTDIR/a.out -Wl,-Map=$OUTDIR/map.map "${args[@]}"
 riscv64-unknown-elf-objdump -d $OUTDIR/a.out >$OUTDIR/a.out.dasm
 riscv64-unknown-elf-objdump -d -g $OUTDIR/a.out >$OUTDIR/a.out.g.dasm
 
-# =============================================================================
+###############################################################################
 
 # semihost
 args=(
@@ -41,7 +41,7 @@ args=(
 )
 qemu-system-riscv64 "${args[@]}"
 
-# =============================================================================
+###############################################################################
 
 # debug
 args=(
@@ -53,3 +53,5 @@ spike -l --log _demo/log.log "${args[@]}"
 # spike -l "${args[@]}" 2>_demo/log.log
 # spike -d "${args[@]}"
 # spike "${args[@]}"
+
+###############################################################################

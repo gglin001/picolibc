@@ -1,6 +1,14 @@
 # toolchain is built with
 # `./configure --prefix=$RISCV --with-arch=rv64gc --with-abi=lp64d --with-sim=spike --enable-llvm`
 
+###############################################################################
+
+meson --help
+meson setup --help >_demos/meson.setup.help.log
+meson configure --help >_demos/meson.configure.help.log
+
+###############################################################################
+
 # TODO: `picolibc-cross.txt` come from project `crosstool-ng`, needs update
 
 args=(
@@ -18,7 +26,7 @@ meson setup "${args[@]}"
 meson compile -C build-meson
 meson install -C build-meson
 
-# ===
+###############################################################################
 
 pushd build-meson/install/lib/
 riscv64-unknown-elf-objdump -d libc.a >libc.a.dasm
@@ -29,3 +37,5 @@ riscv64-unknown-elf-objdump -d libcrt0.a >libcrt0.a.dasm
 riscv64-unknown-elf-objdump -d libdummyhost.a >libdummyhost.a.dasm
 riscv64-unknown-elf-objdump -d -g libc.a >libc.a.g.dasm
 popd
+
+###############################################################################
