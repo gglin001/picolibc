@@ -95,6 +95,8 @@ cpu_family_aliases = {
 		       'm88110' : 'm88k',
 		       # Microblaze
 		       'microblazeel' : 'microblaze',
+		       # mips
+		       'mips64' : 'mips',
 		       # or1k
 		       'or1knd': 'or1k',
 		       # powerpc
@@ -978,6 +980,8 @@ foreach target : ['default-target'] + targets
       picolibc_linker_type_data.set('BFD_END', '*/')
       picolibc_linker_type_data.set('LLD_START', '')
       picolibc_linker_type_data.set('LLD_END', '')
+      picolibc_linker_type_data.set('TLS_PHDRS', 'tls PT_TLS;')
+      picolibc_linker_type_data.set('TLS_INIT_SEG', 'tls')
       if host_cpu_family == 'riscv'
         # ld.lld before version 15 did not support linker relaxations, disable
         # them if we are using an older version.
@@ -993,6 +997,9 @@ foreach target : ['default-target'] + targets
       picolibc_linker_type_data.set('BFD_END', '')
       picolibc_linker_type_data.set('LLD_START', '/* For ld.lld: ')
       picolibc_linker_type_data.set('LLD_END', '*/')
+      picolibc_linker_type_data.set('TLS_PHDRS', '''tls_init PT_TLS;
+        tls PT_TLS;''')
+      picolibc_linker_type_data.set('TLS_INIT_SEG', 'tls_init')
     endif
 
     init_memory_template = '''
@@ -1290,6 +1297,8 @@ conf_data.set('_HAVE_INIT_FINI', get_option('newlib-initfini'), description: 'Su
 conf_data.set('NEWLIB_TLS', thread_local_storage, description: 'use thread local storage')
 conf_data.set('PICOLIBC_TLS', thread_local_storage, description: 'use thread local storage')
 conf_data.set('_HAVE_PICOLIBC_TLS_API', thread_local_storage and have_picolibc_tls_api, description: '_set_tls and _init_tls functions available')
+conf_data.set('_HAVE_PICOLIBC_TLS_RP2040', get_option('tls-rp2040'),
+              description: 'Use Raspberry Pi RP2040 CPUID register to index thread local storage value')
 conf_data.set('POSIX_IO', posix_io, description: 'Use open/close/read/write in tinystdio')
 conf_data.set('_PRINTF_SMALL_ULTOA', printf_small_ultoa, description: 'avoid software division in decimal conversion')
 conf_data.set('ATOMIC_UNGETC', atomic_ungetc, description: 'Use atomics for fgetc/ungetc for re-entrancy')
