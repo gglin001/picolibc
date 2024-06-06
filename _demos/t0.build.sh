@@ -1,3 +1,5 @@
+###############################################################################
+
 # toolchain is built with
 # `./configure --prefix=$RISCV --with-arch=rv64gc --with-abi=lp64d --with-sim=spike --enable-llvm`
 
@@ -15,9 +17,7 @@ args=(
   --reconfigure
   --cross-file=$PWD/_demos/picolibc-cross.txt
   --prefix=$PWD/build-meson/install
-  # -Dsemihost=false
   -Dsemihost=true
-  # -Dnewlib-initfini-array=false
   -Dnewlib-initfini-array=true
   build-meson
 )
@@ -28,14 +28,14 @@ meson install -C build-meson
 
 ###############################################################################
 
-pushd build-meson/install/lib/
-riscv64-unknown-elf-objdump -d libc.a >libc.a.dasm
-riscv64-unknown-elf-objdump -d libcrt0-hosted.a >liblibcrt0-hostedc.a.dasm
-riscv64-unknown-elf-objdump -d libcrt0-minimal.a >libcrt0-minimal.a.dasm
-riscv64-unknown-elf-objdump -d libcrt0-semihost.a >libcrt0-semihost.a.dasm
-riscv64-unknown-elf-objdump -d libcrt0.a >libcrt0.a.dasm
-riscv64-unknown-elf-objdump -d libdummyhost.a >libdummyhost.a.dasm
-riscv64-unknown-elf-objdump -d -g libc.a >libc.a.g.dasm
-popd
+# pushd build-meson/install/lib/
+# riscv64-unknown-elf-objdump -d libc.a >libc.a.dasm
+# riscv64-unknown-elf-objdump -d libcrt0-hosted.a >liblibcrt0-hostedc.a.dasm
+# riscv64-unknown-elf-objdump -d libcrt0-minimal.a >libcrt0-minimal.a.dasm
+# riscv64-unknown-elf-objdump -d libcrt0-semihost.a >libcrt0-semihost.a.dasm
+# riscv64-unknown-elf-objdump -d libcrt0.a >libcrt0.a.dasm
+# riscv64-unknown-elf-objdump -d libdummyhost.a >libdummyhost.a.dasm
+# # riscv64-unknown-elf-objdump -d -g libc.a >libc.a.g.dasm
+# popd
 
 ###############################################################################
