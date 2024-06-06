@@ -50,7 +50,7 @@ qemu-system-riscv64 "${args[@]}"
 
 ###############################################################################
 
-# spike does not support semihost, check log for insts
+# spike does not support semihost, check log for instructions
 DIR="_demos/t2.hello" && mkdir -p $DIR
 args=(
   --pc=0x80000000
@@ -60,5 +60,30 @@ args=(
   $DIR/a.out
 )
 spike "${args[@]}"
+
+###############################################################################
+
+DIR="_demos/t2.hello" && mkdir -p $DIR
+args=(
+  -O binary
+  $DIR/a.out
+  $DIR/a.out.bin
+)
+riscv64-unknown-elf-objcopy "${args[@]}"
+
+#####
+
+DIR="_demos/t2.hello" && mkdir -p $DIR
+args=(
+  -machine virt
+  -cpu rv64
+  -semihosting-config enable=on # semihost
+  -nographic
+  -bios none
+  -monitor none
+  -serial none
+  -kernel $DIR/a.out.bin
+)
+qemu-system-riscv64 "${args[@]}"
 
 ###############################################################################
