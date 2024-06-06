@@ -22,8 +22,16 @@ args=(
 riscv64-unknown-elf-gcc -S -o $DIR/a.s "${args[@]}"
 riscv64-unknown-elf-gcc -o $DIR/a.out -Wl,-Map=$DIR/map.map "${args[@]}"
 
-riscv64-unknown-elf-objdump -d $DIR/a.out >$DIR/a.out.dasm
-riscv64-unknown-elf-objdump -d -g $DIR/a.out >$DIR/a.out.g.dasm
+#####
+
+DIR="_demos/t2.hello" && mkdir -p $DIR
+args=(
+  -d
+  # -D
+  # -g
+  $DIR/a.out
+)
+riscv64-unknown-elf-objdump "${args[@]}" >$DIR/a.out.dasm
 
 ###############################################################################
 
