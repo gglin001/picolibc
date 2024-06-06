@@ -20,6 +20,9 @@ args=(
   # -v
   --oslib=semihost
   # --oslib=dummyhost
+  --crt0=hosted
+  # --crt0=semihost
+  # --crt0=minimal
   -T$LDSCRIPT
   $TARGET
 )
@@ -48,6 +51,13 @@ args=(
   -bios none
   -monitor none
   -serial none
+  #
+  # -d out_asm
+  -d in_asm
+  # -d cpu
+  # -d exec
+  # -d op
+  #
   -kernel $DIR/main
 )
 qemu-system-riscv64 "${args[@]}"
