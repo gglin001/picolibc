@@ -9,12 +9,15 @@ meson --help
 meson setup --help >_demos/meson.setup.help.log
 meson configure --help >_demos/meson.configure.help.log
 
+riscv64-unknown-elf-gcc --print-multi-lib
+
 ###############################################################################
 
 # TODO: `picolibc-cross.txt` come from project `crosstool-ng`, needs update
 
 args=(
   --reconfigure
+  -Dmultilib-list="rv64imac/lp64,rv64imafdc/lp64d"
   --cross-file=$PWD/_demos/picolibc-cross.txt
   --prefix=$PWD/build-meson/install
   -Dsemihost=true
